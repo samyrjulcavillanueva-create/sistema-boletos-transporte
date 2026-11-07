@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TransBus | Gestión de Boletos</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<div class="app">
+
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <div class="brand-icon"><i class="fa-solid fa-bus"></i></div>
+            <div>
+                <h2>TransBus</h2>
+                <span>GESTIÓN DE TRANSPORTE</span>
+            </div>
+        </div>
+
+        <div class="menu-label">MENÚ PRINCIPAL</div>
+
+        <nav>
+            <a href="#inicio" class="nav-link active">
+                <i class="fa-solid fa-chart-pie"></i> Panel principal
+            </a>
+            <a href="#registro" class="nav-link">
+                <i class="fa-solid fa-ticket"></i> Registrar boleto
+            </a>
+            <a href="#boletos" class="nav-link">
+                <i class="fa-solid fa-list"></i> Boletos registrados
+            </a>
+            <a href="#viajes" class="nav-link">
+                <i class="fa-solid fa-route"></i> Viajes
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="support-icon"><i class="fa-solid fa-headset"></i></div>
+            <strong>Panel administrativo</strong>
+            <p>Control y gestión de viajes y pasajeros.</p>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div>
+                <span class="breadcrumb">Sistema / Panel principal</span>
+                <h1>Panel de control</h1>
+            </div>
+            <div class="user-profile">
+                <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                <div>
+                    <strong>Administrador</strong>
+                    <small>Gestión del sistema</small>
+                </div>
+            </div>
+        </header>
+
+        <section id="inicio" class="welcome">
+            <div>
+                <span class="eyebrow">SISTEMA DE TRANSPORTE</span>
+                <h2>¡Bienvenido al panel de gestión!</h2>
+                <p>Administra los boletos, pasajeros y viajes de tu empresa.</p>
+            </div>
+            <div class="welcome-icon"><i class="fa-solid fa-bus-simple"></i></div>
+        </section>
+
+        <section class="stats-grid">
+            <article class="stat-card">
+                <div class="stat-icon blue"><i class="fa-solid fa-ticket"></i></div>
+                <span>Total de boletos</span>
+                <h3 id="totalBoletos">0</h3>
+                <small>Boletos registrados</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon green"><i class="fa-solid fa-users"></i></div>
+                <span>Pasajeros</span>
+                <h3 id="totalPasajeros">0</h3>
+                <small>Pasajeros registrados</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon orange"><i class="fa-solid fa-route"></i></div>
+                <span>Viajes disponibles</span>
+                <h3 id="totalViajes">0</h3>
+                <small>Rutas registradas</small>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-icon purple"><i class="fa-solid fa-coins"></i></div>
+                <span>Ingresos registrados</span>
+                <h3 id="totalIngresos">S/ 0.00</h3>
+                <small>Según boletos registrados</small>
+            </article>
+        </section>
+
+        <section class="content-card" id="registro">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">NUEVA OPERACIÓN</span>
+                    <h2>Registrar boleto de viaje</h2>
+                    <p>Completa los datos del pasajero y selecciona su viaje.</p>
+                </div>
+                <div class="heading-icon"><i class="fa-solid fa-file-circle-plus"></i></div>
+            </div>
+
+            <form id="formBoleto">
+                <h3 class="form-subtitle"><i class="fa-solid fa-user"></i> Información del pasajero</h3>
+
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="dni">DNI *</label>
+                        <input type="text" id="dni" maxlength="15" placeholder="Número de documento" required>
+                    </div>
+                    <div class="field">
+                        <label for="nombres">Nombres *</label>
+                        <input type="text" id="nombres" placeholder="Nombres del pasajero" required>
+                    </div>
+                    <div class="field">
+                        <label for="apellidos">Apellidos *</label>
+                        <input type="text" id="apellidos" placeholder="Apellidos del pasajero" required>
+                    </div>
+                    <div class="field">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" placeholder="Número de contacto">
+                    </div>
+                </div>
+
+                <div class="form-divider"></div>
+
+                <h3 class="form-subtitle"><i class="fa-solid fa-route"></i> Información del viaje</h3>
+
+                <div class="form-grid">
+                    <div class="field full-width">
+                        <label for="viaje_id">Seleccionar viaje *</label>
+                        <select id="viaje_id" required>
+                            <option value="">Primero registra un viaje</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="asiento">Número de asiento *</label>
+                        <input type="number" id="asiento" min="1" placeholder="Ej. 12" required>
+                    </div>
+                </div>
+
+                <div id="mensajeFormulario" class="message" role="status"></div>
+
+                <div class="form-actions">
+                    <button type="reset" class="btn-secondary">
+                        <i class="fa-solid fa-rotate-left"></i> Limpiar
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-ticket"></i> Registrar boleto
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="content-card" id="viajes">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">PROGRAMACIÓN</span>
+                    <h2>Registrar nuevo viaje</h2>
+                    <p>Agrega una ruta para habilitar la venta de boletos.</p>
+                </div>
+                <div class="heading-icon"><i class="fa-solid fa-bus"></i></div>
+            </div>
+
+            <form id="formViaje">
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="origen">Ciudad de origen *</label>
+                        <input id="origen" placeholder="Ej. Huaraz" required>
+                    </div>
+                    <div class="field">
+                        <label for="destino">Ciudad de destino *</label>
+                        <input id="destino" placeholder="Ej. Lima" required>
+                    </div>
+                    <div class="field">
+                        <label for="fecha_salida">Fecha de salida *</label>
+                        <input type="date" id="fecha_salida" required>
+                    </div>
+                    <div class="field">
+                        <label for="hora_salida">Hora de salida *</label>
+                        <input type="time" id="hora_salida" required>
+                    </div>
+                    <div class="field">
+                        <label for="precio">Precio (S/) *</label>
+                        <input type="number" id="precio" min="0.01" step="0.01" placeholder="Ej. 55.00" required>
+                    </div>
+                    <div class="field">
+                        <label for="bus">Unidad / Bus</label>
+                        <input id="bus" placeholder="Ej. Bus 01">
+                    </div>
+                </div>
+                <div id="mensajeViaje" class="message" role="status"></div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-plus"></i> Guardar viaje
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="content-card" id="boletos">
+            <div class="section-heading table-heading">
+                <div>
+                    <span class="eyebrow">CONTROL DE REGISTROS</span>
+                    <h2>Boletos registrados</h2>
+                    <p>Consulta los pasajeros y sus respectivos viajes.</p>
+                </div>
+                <button class="btn-secondary" id="btnActualizar">
+                    <i class="fa-solid fa-rotate"></i> Actualizar
+                </button>
+            </div>
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id="buscarBoleto" placeholder="Buscar por código, DNI o pasajero...">
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CÓDIGO</th>
+                            <th>PASAJERO</th>
+                            <th>DESTINO</th>
+                            <th>FECHA</th>
+                            <th>ASIENTO</th>
+                            <th>PRECIO</th>
+                            <th>ESTADO</th>
+                            <th>ACCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaBoletos">
+                        <tr><td colspan="8" class="empty-state">Cargando registros...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <span>© 2026 TransBus - Sistema de Registro de Boletos</span>
+            <span>Desarrollado con Node.js, Express y MySQL</span>
+        </footer>
+
+    </main>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

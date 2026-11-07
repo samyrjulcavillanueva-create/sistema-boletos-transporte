@@ -1,0 +1,19 @@
+
+{
+  "name": "sistema-boletos-transporte",
+  "version": "1.0.0",
+  "description": "Sistema de registro y administracion de boletos de transporte",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "transporte",
+    "boletos",
+    "api-rest"
+  ],
+  "author": "Samyr",
+  "license": "ISC",
+  "type": "commonjs"
+}
